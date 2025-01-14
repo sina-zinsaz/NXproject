@@ -1,51 +1,43 @@
-import { CSSProperties, PropsWithChildren } from 'react';
-
-type ButtonProps = PropsWithChildren<{
-  onClick?: () => void;
+type ButtonProps = {
   variant: 'primary' | 'secondary';
-  size: 'sm' | 'md' | 'lg';
-}>;
+  rounded: 'small' | 'medium' | 'large';
+  children: React.ReactNode;
+};
 
-export const Button = ({
-  children,
-  onClick,
-  variant = 'primary',
-  size = 'md',
-}: ButtonProps) => {
-  const variantStyles: Record<ButtonProps['variant'], CSSProperties> = {
-    primary: {
-      backgroundColor: 'blue',
-    },
-    secondary: {
-      backgroundColor: 'gray',
-    },
+export const Button = ({ variant, rounded, children }: ButtonProps) => {
+  const color: Record<ButtonProps['variant'], { backgroundColor: string }> = {
+    primary: { backgroundColor: 'white' },
+    secondary: { backgroundColor: 'gray' },
   };
 
-  const sizeStyles: Record<ButtonProps['size'], CSSProperties> = {
-    sm: {
-      padding: '0.5rem',
-    },
-    md: {
-      padding: '0.75rem',
-    },
-    lg: {
-      padding: '1rem',
-    },
+  const borderRadius: Record<ButtonProps['rounded'], string> = {
+    small: '3px',
+    medium: '6px',
+    large: '20px',
   };
 
   return (
-    <button
-      style={{
-        outline: 'none',
-        border: 'none',
-        cursor: 'pointer',
-        borderRadius: 10,
-        ...variantStyles[variant],
-        ...sizeStyles[size],
-      }}
-      onClick={onClick}
-    >
-      {children}
-    </button>
+    <>
+      <button
+        style={{
+          backgroundColor: color[variant].backgroundColor,
+          borderRadius: borderRadius[rounded],
+          cursor: 'pointer',
+          marginRight: '20px',
+        }}
+      >
+        {children}
+      </button>
+      <button
+        style={{
+          backgroundColor: color[variant].backgroundColor,
+          borderRadius: borderRadius[rounded],
+          cursor: 'pointer',
+        }}
+        disabled
+      >
+        {children}
+      </button>
+    </>
   );
 };

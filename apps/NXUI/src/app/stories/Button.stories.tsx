@@ -1,5 +1,4 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
 import { ComponentProps } from 'react';
 import { Button } from '../components/Button';
 
@@ -17,15 +16,6 @@ const meta: Meta<StoryProps> = {
         type: 'select',
       },
     },
-    size: {
-      options: ['sm', 'md', 'lg'],
-      control: {
-        type: 'select',
-      },
-    },
-  },
-  args: {
-    onClick: fn(),
   },
 };
 
@@ -35,9 +25,9 @@ type Story = StoryObj<StoryProps>;
 
 export const Primary: Story = {
   args: {
-    buttonText: 'Hello',
+    buttonText: 'TEST',
     variant: 'primary',
-    size: 'md',
+    rounded: 'small',
   },
   render: ({ buttonText, ...args }) => {
     return <Button {...args}>{buttonText}</Button>;
@@ -46,9 +36,9 @@ export const Primary: Story = {
 
 export const Secondary: Story = {
   args: {
-    buttonText: 'Hello',
+    buttonText: 'TEST',
     variant: 'secondary',
-    size: 'md',
+    rounded: 'small',
   },
   render: ({ buttonText, ...args }) => {
     return <Button {...args}>{buttonText}</Button>;
